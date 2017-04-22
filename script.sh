@@ -1,19 +1,18 @@
 #!/bin/bash
-restorePsqlFile="/home/nikita/restore_psql.sh"
-backupAndRotationPsqlFile="/home/nikita/backup_and_rotation_psql.sh"
-restorePsqlOrigSum=$(cat /home/nikita/sums.txt | grep $restorePsqlFile | awk -F "=" '{print $2}')
-backupAndRotationPsqlOrigSum=$(cat /home/nikita/sums.txt | grep $backupAndRotationPsqlFile | awk -F "=" '{print $2}')
-backupAndRotationPsqlSum=$(md5sum $backupAndRotationPsqlFile | awk '{print $1}')
-restorePsqlSum=$(md5sum $restorePsqlFile | awk '{print $1}')
-if [ "$backupAndRotationPsqlOrigSum" == "$backupAndRotationPsqlSum" ]
+File1="/home/nikita/restore_psql.sh"
+File2="/home/nikita/backup_and_rotation_psql.sh"
+File1OrigSum=$(cat /home/nikita/sums.txt | grep $File1 | awk -F "=" '{print $2}')
+File2OrigSum=$(cat /home/nikita/sums.txt | grep $File2 | awk -F "=" '{print $2}')
+File2Sum=$(md5sum $File2 | awk '{print $1}')
+File1Sum=$(md5sum $File1 | awk '{print $1}')
+if [ "$File2OrigSum" == "$File2Sum" ]
 then
-echo "file $backupAndRotationPsqlFile is original"
+echo "file $File2 is original"
 else
-echo "file $backupAndRotationPsqlFile has been changed"
+exit 2
 fi
-if [ "$restorePsqlOrigSum" == "$restorePsqlSum" ]
+if [ "$File1OrigSum" == "$File1Sum" ]
 then
-echo "file $restorePsqlFile is original"
 else
-echo "file $restorePsqlFile has been changed"
+exit 1
 fi

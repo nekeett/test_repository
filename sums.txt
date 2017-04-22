@@ -1,0 +1,2 @@
+/home/nikita/restore_psql.sh=ae095c686fbb21404628a3efa8221b99
+/home/nikita/backup_and_rotation_psql.sh=10789b904c49ada473bdcca8332fd5ff
